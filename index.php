@@ -1,23 +1,34 @@
 <?php
-
-$menu=array( 'Home'=>'home.php',
-    'About'=>'about.php',
-    'Contacts'=>'contacts.php');
-
+$dir="files";
+$files = scandir($dir);
+array_shift($files);
+array_shift($files);
 
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Title of the document</title>
+    <meta charset="UTF-8">
+    <title>Document</title>
 </head>
-
 <body>
+
+</body>
+</html>
 <?php
 
-foreach ($menu as $key=>$value){
-    echo "<a href='$value'>$key</a><br>";
+foreach ($files as $key => $value) {
+    echo '<a href="http://'.$_SERVER['HTTP_HOST'].'/files/'.$value.'">'.$value.'</a>
+    <form action="edit.php" method="post">
+        <input type="hidden" name="text" value="'.$value.'">
+        <input type="submit" value="Редактировать">
+    </form>
+    <form action="save.php" method="post">
+        <input type="hidden" name="text" value="'.$value.'">
+        <input type="submit" value="Скачать">
+    </form>
+    <br/>';
 }
 
 ?>
